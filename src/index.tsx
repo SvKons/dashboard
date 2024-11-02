@@ -1,19 +1,35 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Achievements from './components/Achievements';
+import Goals from './components/Goals';
+import Participants from './components/Participants';
+import Statistics from './components/Statistics';
+import MainPage from './pages/MainPage';
+import './reset.scss';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const routes = createBrowserRouter([
+    {
+        path: '/',
+        element: <MainPage />,
+    },
+    {
+        path: 'statistics/:subComponent?',
+        element: <Statistics />,
+    },
+    {
+        path: 'participants/:subComponent?',
+        element: <Participants />,
+    },
+    {
+        path: 'goals',
+        element: <Goals />,
+    },
+    {
+        path: 'achievements',
+        element: <Achievements />,
+    },
+]);
+
+root.render(<RouterProvider router={routes} />);
